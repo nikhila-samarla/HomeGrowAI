@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 function App() {
   const [language, setLanguage] = useState("English");
   const [question, setQuestion] = useState("");
@@ -122,7 +122,7 @@ function App() {
   }
 
   try {
-    const response = await fetch("http://localhost:3001/api/ask", {
+    const response = await fetch(`${API_URL}/api/ask`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
