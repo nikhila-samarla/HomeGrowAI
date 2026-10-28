@@ -35,6 +35,7 @@ if (currentPage === "about") {
 
     const recognition = new SpeechRecognition();
     recognition.lang = language === "English" ? "en-IN" : "te-IN";
+recognition.processLocally = false;
     recognition.continuous = false;
     recognition.interimResults = true;
     recognition.maxAlternatives = 1;
