@@ -17,59 +17,68 @@ if (currentPage === "about") {
 }
   
   const startVoice = async () => {
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert("Voice recognition is not supported in this browser. Please try Chrome.");
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+  setQuestion("");
+  setAnswer("");
+
   try {
-    // Ask for microphone permission first
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      alert("Microphone access is not supported in this browser.");
-      return;
-    }
-
-    const stream = await navigator.mediaDevices.getUserMedia({
-      audio: true,
-    });
-
-    // Permission is granted, so stop the temporary microphone stream
-    stream.getTracks().forEach((track) => track.stop());
-
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
-      alert("Voice recognition is not supported in this browser.");
-      return;
-    }
+    await navigator.mediaDevices.getUserMedia({ audio: true })
+      .then((stream) => stream.getTracks().forEach((track) => track.stop()));
 
     const recognition = new SpeechRecognition();
-
     recognition.lang = language === "English" ? "en-IN" : "te-IN";
     recognition.continuous = false;
-    recognition.interimResults = false;
+    recognition.interimResults = true;
     recognition.maxAlternatives = 1;
 
-    recognition.onstart = () => {
-      console.log("🎤 Microphone started");
-    };
+    let finalText = "";
+    let submitted = false;
 
     recognition.onresult = (event) => {
-      const spokenText = event.results[0][0].transcript;
-      setQuestion(spokenText);
+      let text = "";
+
+      for (let i = 0; i < event.results.length; i++) {
+        text += event.results[i][0].transcript;
+      }
+
+      setQuestion(text.trim());
+
+      if (event.results[event.results.length - 1].isFinal) {
+        finalText = text.trim();
+      }
     };
 
     recognition.onerror = (event) => {
       console.error("Voice error:", event.error);
-      alert("Could not hear your voice. Please try again.");
+
+      if (event.error === "not-allowed") {
+        alert("Please allow microphone access for HomeGrowAI.");
+      } else if (event.error !== "no-speech" && event.error !== "aborted") {
+        console.error("Voice recognition failed:", event.error);
+      }
     };
 
-    recognition.onend = () => {
-      setTimeout(() => {
-        document.querySelector(".ask-btn")?.click();
-      }, 300);
-    };
+     recognition.onend = () => {
+  if (finalText && !submitted) {
+    submitted = true;
+
+    setQuestion(finalText);
+
+    handleAsk(finalText);
+  }
+};
 
     recognition.start();
-
   } catch (error) {
-    console.error("Microphone permission error:", error);
+    console.error("Microphone error:", error);
     alert("Please allow microphone access for HomeGrowAI.");
   }
 };
