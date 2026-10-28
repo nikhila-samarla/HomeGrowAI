@@ -58,6 +58,7 @@ if (currentPage === "about") {
 
     recognition.onerror = (event) => {
       console.error("Voice error:", event.error);
+      alert("Voice error: " + event.error);
 
       if (event.error === "not-allowed") {
         alert("Please allow microphone access for HomeGrowAI.");
