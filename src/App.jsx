@@ -50,7 +50,7 @@ if (currentPage === "about") {
       }
 
       setQuestion(text.trim());
-
+      console.log("Recognized speech:", text.trim());
       if (event.results[event.results.length - 1].isFinal) {
         finalText = text.trim();
       }
