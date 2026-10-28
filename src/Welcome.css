@@ -1,0 +1,132 @@
+.welcome-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 15% 20%, #d6f5b9 0%, transparent 35%),
+    radial-gradient(ellipse at 85% 80%, #a8d5a2 0%, transparent 35%),
+    linear-gradient(135deg, #f5f9e9, #e1f0d5, #c5e2bd);
+  color: #173f27;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+.welcome-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 8%;
+}
+
+.welcome-nav h2 {
+  margin: 0;
+  font-size: 25px;
+  color: #174b2b;
+}
+
+.welcome-nav span {
+  color: #365f40;
+  font-size: 14px;
+}
+
+.welcome-content {
+  min-height: 78vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px 20px;
+  box-sizing: border-box;
+}
+
+.welcome-icon {
+  font-size: 72px;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 8px 8px #315b3022);
+}
+
+.welcome-label {
+  color: #327443;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.welcome-content h1 {
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 1.12;
+  margin: 12px 0;
+  color: #194b2b;
+  font-weight: 800;
+  text-shadow: 0 2px 0 #ffffff55;
+}
+
+.welcome-content h1 span {
+  color: #2f7d3c;
+}
+
+.welcome-description {
+  max-width: 580px;
+  color: #385b40;
+  line-height: 1.8;
+  font-size: 16px;
+  margin: 15px 0 28px;
+}
+
+.enter-button {
+  background: linear-gradient(135deg, #2e783e, #174e2b);
+  color: #ffffff;
+  border: 2px solid #ffffffaa;
+  border-radius: 30px;
+  padding: 16px 34px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 10px 25px #245c3033;
+  transition: 0.25s;
+}
+
+.enter-button:hover {
+  background: #123d23;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px #245c3044;
+}
+
+.enter-button span {
+  margin-left: 10px;
+}
+
+.welcome-footer {
+  margin-top: 45px;
+  color: #41684a;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 600px) {
+  .welcome-nav {
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .welcome-nav h2 {
+    font-size: 21px;
+  }
+
+  .welcome-nav span {
+    font-size: 11px;
+  }
+
+  .welcome-content {
+    min-height: 78vh;
+    padding: 20px;
+  }
+
+  .welcome-content h1 {
+    font-size: 42px;
+  }
+
+  .welcome-description {
+    font-size: 14px;
+  }
+}

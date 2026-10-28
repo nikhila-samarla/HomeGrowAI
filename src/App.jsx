@@ -1,41 +1,77 @@
 import { useState } from "react";
+import Welcome from "./Welcome";
+import About from "./About";
 import "./App.css";
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 function App() {
+  const [currentPage, setCurrentPage] = useState("welcome");
   const [language, setLanguage] = useState("English");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
-  const startVoice = () => {
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
+if (currentPage === "welcome") {
+  return <Welcome onEnter={() => setCurrentPage("about")} />;
+}
 
-  if (!SpeechRecognition) {
-    alert("Voice recognition is not supported in this browser.");
-    return;
+if (currentPage === "about") {
+  return <About onEnter={() => setCurrentPage("chat")} />;
+}
+  
+  const startVoice = async () => {
+  try {
+    // Ask for microphone permission first
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      alert("Microphone access is not supported in this browser.");
+      return;
+    }
+
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: true,
+    });
+
+    // Permission is granted, so stop the temporary microphone stream
+    stream.getTracks().forEach((track) => track.stop());
+
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("Voice recognition is not supported in this browser.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = language === "English" ? "en-IN" : "te-IN";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => {
+      console.log("🎤 Microphone started");
+    };
+
+    recognition.onresult = (event) => {
+      const spokenText = event.results[0][0].transcript;
+      setQuestion(spokenText);
+    };
+
+    recognition.onerror = (event) => {
+      console.error("Voice error:", event.error);
+      alert("Could not hear your voice. Please try again.");
+    };
+
+    recognition.onend = () => {
+      setTimeout(() => {
+        document.querySelector(".ask-btn")?.click();
+      }, 300);
+    };
+
+    recognition.start();
+
+  } catch (error) {
+    console.error("Microphone permission error:", error);
+    alert("Please allow microphone access for HomeGrowAI.");
   }
-
-  const recognition = new SpeechRecognition();
-
-  recognition.lang = language === "English" ? "en-IN" : "te-IN";
-  recognition.continuous = false;
-  recognition.interimResults = false;
-
-  recognition.onresult = (event) => {
-    const spokenText = event.results[0][0].transcript;
-    setQuestion(spokenText);
-  };
-  recognition.onend = () => {                                                                                                                                                                                                                                          
-
-    setTimeout(() => {
-      document.querySelector(".ask-btn")?.click();
-    }, 500);
-  };
-
-  recognition.onerror = (event) => {
-    console.error("Voice error:", event.error);
-  };
-
-  recognition.start();
 };
 
   const title = "HomeGrowAI"
@@ -54,6 +90,7 @@ function App() {
       : "HomeGrowAI ని అడగండి";
 
   return (
+  
     <div className="app">
       <header className="navbar">
         <div className="logo">
@@ -61,14 +98,19 @@ function App() {
         </div>
 
         <button
-          className="language-btn"
-          onClick={() => {
-            window.speechSynthesis.cancel();
-            setLanguage(language === "English" ? "Telugu" : "English")
-          } }
-        >
-          {language === "English" ? "English" : "తెలుగు"}
-        </button>
+  className="language-btn"
+  onClick={() => {
+    window.speechSynthesis.cancel();
+    setAnswer("");
+    setQuestion("");
+    setLanguage((previousLanguage) =>
+      previousLanguage === "English" ? "Telugu" : "English"
+    );
+  }}
+>
+  {language}
+</button>
+
       </header>
 
       <main className="hero">
@@ -179,7 +221,7 @@ window.speechSynthesis.speak(speech);
         <div className="features">
           <div className="feature">
   <span>🤖</span>
-  <h3>{language === "English" ? "AI Gardening" : "AI తోటపని"}</h3>
+  <h3>AI Gardening</h3>
   <p>
     {language === "English"
       ? "Ask open-ended gardening questions."
@@ -208,6 +250,14 @@ window.speechSynthesis.speak(speech);
 </div>
         </div>
       </main>
+
+<section className="contact-section">
+  <h2>Contact Us</h2>
+  <p>Have questions or suggestions about HomeGrowAI?</p>
+  <p>We would love to hear from you!</p>
+  <p>📞 Contact Number: +91 2346579801</p>
+  <p>✉️ Email: homegrowai@gmail.com</p>
+</section>
 
       <footer>
         <p>

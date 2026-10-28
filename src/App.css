@@ -229,3 +229,22 @@ footer {
   white-space: pre-wrap;
 }
 
+.contact-section {
+  text-align: center;
+  padding: 35px 20px;
+  margin: 25px auto;
+  max-width: 800px;
+  background: #f0f8f0;
+  border-radius: 15px;
+}
+
+.contact-section h2 {
+  color: #2e7d32;
+  margin-bottom: 12px;
+}
+
+.contact-section p {
+  color: #444;
+  font-size: 16px;
+  margin: 8px 0;
+}
