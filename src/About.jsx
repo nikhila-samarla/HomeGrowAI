@@ -29,18 +29,7 @@ function About({ onEnter }) {
       color: "#20452b",
       fontFamily: "Arial, sans-serif"
     }}>
-      <nav style={{
-        padding: "22px 7%",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        background: "#ffffff"
-      }}>
-        <h2 style={{ margin: 0, color: "#24683b" }}>🌱 HomeGrowAI</h2>
-        <span style={{ color: "#55745d", fontSize: "14px" }}>
-          Grow Green, Live Green
-        </span>
-      </nav>
+      
 
       <header style={{
         padding: "65px 8%",

@@ -1,21 +1,24 @@
 import { useState } from "react";
 import Welcome from "./Welcome";
+import Home from "./Home";
 import About from "./About";
+import TraditionalGardening from "./TraditionalGardening";
+import MyGarden from "./MyGarden";
+import College from "./College";
+import MiniGame from "./MiniGame";
+import MicroGardening from "./MicroGardening";
 import "./App.css";
+
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 function App() {
   const [currentPage, setCurrentPage] = useState("welcome");
   const [language, setLanguage] = useState("English");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
-if (currentPage === "welcome") {
-  return <Welcome onEnter={() => setCurrentPage("about")} />;
-}
 
-if (currentPage === "about") {
-  return <About onEnter={() => setCurrentPage("chat")} />;
+if (currentPage === "welcome") {
+  return <Welcome onEnter={() => setCurrentPage("home")} />;
 }
-  
   const startVoice = async () => {
   const SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -59,7 +62,7 @@ recognition.processLocally = false;
 
     recognition.onerror = (event) => {
       console.error("Voice error:", event.error);
-      alert("Voice error: " + event.error);
+      
 
       if (event.error === "not-allowed") {
         alert("Please allow microphone access for HomeGrowAI.");
@@ -104,34 +107,56 @@ recognition.processLocally = false;
   
     <div className="app">
       <header className="navbar">
-        <div className="logo">
-          🌱 <span>HomeGrowAI</span>
-        </div>
+  <div className="logo">
+    🌱 <span>HomeGrowAI</span>
+  </div>
 
-        <button
-  className="language-btn"
-  onClick={() => {
-    window.speechSynthesis.cancel();
-    setAnswer("");
-    setQuestion("");
-    setLanguage((previousLanguage) =>
-      previousLanguage === "English" ? "Telugu" : "English"
-    );
-  }}
->
-  {language}
-</button>
+  <nav className="nav-links">
+  {[
+  ["Home", "home"],
+  ["About Our Project", "about"],
+  ["Traditional Gardening", "traditional"],
+  ["AI Gardening Assistant", "assistant"],
+  ["Micro Gardening", "micro"],
+  ["My Garden", "mygarden"],
+  ["My Garden Progress", "progress"],
+  ["Mini Games", "games"],
+  ["About My College", "college"],
+  ["Contact Us", "contact"]
+].map(([label, page]) => (
+  <button
+    key={page}
+    onClick={() => setCurrentPage(page)}
+  >
+    {label}
+  </button>
+))}
+</nav>
 
-      </header>
+  <button
+    className="language-btn"
+    onClick={() => {
+      window.speechSynthesis.cancel();
+      setAnswer("");
+      setQuestion("");
+      setLanguage((previousLanguage) =>
+        previousLanguage === "English" ? "Telugu" : "English"
+      );
+    }}
+  >
+    {language}
+  </button>
+</header>
 
-      <main className="hero">
+      {currentPage === "assistant" && (
+  <main className="hero" id="ai-section">
         <div className="plant-icon">🌿</div>
 
         <h1>{title}</h1>
 
         <p className="subtitle">{subtitle}</p>
 
-        <div className="chat-card">
+        <div className="chat-card" id="ai-section">
           <h2>{askText}</h2>
 
           <p>
@@ -261,22 +286,38 @@ window.speechSynthesis.speak(speech);
 </div>
         </div>
       </main>
+      )}
+      {currentPage === "home" && <Home />}
 
-<section className="contact-section">
-  <h2>Contact Us</h2>
-  <p>Have questions or suggestions about HomeGrowAI?</p>
-  <p>We would love to hear from you!</p>
-  <p>📞 Contact Number: +91 2346579801</p>
-  <p>✉️ Email: homegrowai@gmail.com</p>
-</section>
+{currentPage === "about" && <About />}
 
-      <footer>
-        <p>
-  🌿 {language === "English"
-    ? "HomeGrowAI • Smart Gardening for Everyone"
-    : "HomeGrowAI • అందరికీ స్మార్ట్ తోటపని"}
-</p>
-      </footer>
+{currentPage === "traditional" && <TraditionalGardening />}
+
+{currentPage === "micro" && <MicroGardening />}
+
+{currentPage === "mygarden" && <MyGarden page="mygarden" />}
+
+{currentPage === "progress" && <MyGarden page="progress" />}
+
+{currentPage === "games" && <MiniGame />}
+
+{currentPage === "college" && <College />}
+
+{currentPage === "contact" && (
+  <section className="contact-section">
+    <h2>Contact Us</h2>
+    <p>Have questions or suggestions about HomeGrowAI?</p>
+    <p>We would love to hear from you!</p>
+    <p>📞 Contact Number: +91 2346579801</p>
+    <p>✉️ Email: homegrowai@gmail.com</p>
+  </section>
+)}
+
+
+
+<footer>
+  <p>🌿 HomeGrowAI • Smart Gardening for Everyone</p>
+</footer>
     </div>
   );
 }

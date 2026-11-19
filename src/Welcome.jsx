@@ -25,7 +25,7 @@ function Welcome({ onEnter }) {
           and take your first step towards a greener home.
         </p>
 
-        <button className="enter-button" onClick={() => onEnter("about")}>
+        <button className="enter-button" onClick={() => onEnter("home")}>
           Enter Project <span>→</span>
         </button>
 

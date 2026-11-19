@@ -14,35 +14,64 @@ body {
   min-height: 100vh;
 }
 
-/* Navbar */
+/* Dark Green Navigation Bar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 7%;
-  background: #ffffff;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 18px 25px;
+  background: #123d27;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 23px;
   font-weight: bold;
-  color: #176b3a;
+  color: white;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex: 1;
+  flex-wrap: nowrap;
+}
+
+.nav-links button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: 0.3s ease;
+}
+
+.nav-links button:hover {
+  background: #34784b;
+  border-radius: 8px;
+  color: white;
 }
 
 .language-btn {
-  border: none;
-  background: #176b3a;
+  border: 1px solid #ffffff;
+  background: #34784b;
   color: white;
-  padding: 10px 18px;
+  padding: 10px 15px;
   border-radius: 20px;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
-.language-btn:hover {
-  background: #0f512b;
-}
 
 /* Main */
 .hero {
@@ -247,4 +276,165 @@ footer {
   color: #444;
   font-size: 16px;
   margin: 8px 0;
+}
+.traditional-nav-btn {
+  background: #e0f0e4;
+  color: #176b3a;
+  border: 1px solid #b8d8c0;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.traditional-nav-btn:hover {
+  background: #176b3a;
+  color: white;
+}
+/* Navigation Bar */
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.nav-links button {
+  background: transparent;
+  border: none;
+  color: #183b25;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.nav-links button:hover {
+  color: #ffffff;
+  background: #2e7d46;
+  border-radius: 8px;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .nav-links {
+    width: 100%;
+    gap: 5px;
+  }
+
+  .nav-links button {
+    font-size: 13px;
+    padding: 8px;
+  }
+}
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  background: linear-gradient(135deg, #dcefd2, #f4f7ec);
+  font-family: Arial, sans-serif;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 35px;
+  text-align: center;
+  background: white;
+  border-radius: 22px;
+  box-shadow: 0 10px 35px #244d2c20;
+}
+
+.login-icon {
+  font-size: 45px;
+}
+
+.login-card h1 {
+  color: #24683b;
+  margin-bottom: 5px;
+}
+
+.login-subtitle {
+  color: #64816a;
+}
+
+.login-card h2 {
+  color: #20452b;
+  margin-top: 28px;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.login-card input {
+  padding: 14px;
+  border: 1px solid #d5e3d1;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.login-card form button {
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #286a3c;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.signup-switch {
+  margin-top: 22px;
+}
+
+.signup-switch span {
+  color: #286a3c;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.back-btn {
+  margin-top: 15px;
+  border: none;
+  background: transparent;
+  color: #286a3c;
+  cursor: pointer;
+}
+.nav-links button.active,
+.nav-links button.active:hover {
+  background-color: #176b3a !important;
+  color: #ffffff !important;
+}
+
+.nav-links button {
+  background: transparent;
+  border: none;
+  color: white !important;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  border-radius: 8px;
+}
+
+.nav-links button:hover {
+  background: #3b8b4a;
+  color: white !important;
 }

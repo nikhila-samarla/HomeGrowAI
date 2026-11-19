@@ -1,0 +1,134 @@
+.micro-page {
+  padding-bottom: 55px;
+  background: #f3f9f3;
+  color: #244b32;
+  font-family: Arial, sans-serif;
+}
+
+.micro-hero {
+  text-align: center;
+  padding: 65px 20px;
+  color: white;
+  background: linear-gradient(135deg, #12472d, #398653);
+}
+
+.micro-hero > p:first-child {
+  color: #b8f2c9;
+  letter-spacing: 3px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.micro-hero h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  margin: 15px 0;
+}
+
+.micro-hero p {
+  max-width: 700px;
+  margin: 12px auto;
+  line-height: 1.8;
+}
+
+.micro-intro {
+  max-width: 950px;
+  margin: 45px auto;
+  padding: 0 22px;
+  text-align: center;
+}
+
+.micro-intro h2,
+.micro-tips h2 {
+  color: #246a3e;
+  font-size: 27px;
+}
+
+.micro-intro p {
+  line-height: 1.9;
+  color: #627365;
+}
+
+.micro-grid {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 22px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 23px;
+}
+
+.micro-card {
+  background: white;
+  padding: 27px;
+  border-radius: 17px;
+  border: 1px solid #dfebdf;
+  box-shadow: 0 7px 22px #24502b0d;
+}
+
+.micro-icon {
+  font-size: 43px;
+}
+
+.micro-card h2 {
+  color: #276a40;
+  font-size: 20px;
+}
+
+.micro-card p {
+  color: #657468;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.micro-plants {
+  padding: 13px;
+  background: #eaf6eb;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #28603b;
+}
+
+.micro-tips {
+  max-width: 950px;
+  margin: 50px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 18px;
+}
+
+.micro-tips li {
+  color: #596c5d;
+  line-height: 2;
+}
+
+.micro-conclusion {
+  margin: 35px 22px;
+  padding: 40px 25px;
+  text-align: center;
+  color: white;
+  background: linear-gradient(120deg, #185433, #398653);
+  border-radius: 18px;
+}
+
+.micro-conclusion h2 {
+  font-size: 27px;
+}
+
+.micro-conclusion p {
+  line-height: 1.9;
+}
+
+@media (max-width: 750px) {
+  .micro-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .micro-grid {
+    grid-template-columns: 1fr;
+  }
+}
