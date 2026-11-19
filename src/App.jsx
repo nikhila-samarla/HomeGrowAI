@@ -12,6 +12,7 @@ import "./App.css";
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 function App() {
   const [currentPage, setCurrentPage] = useState("welcome");
+  const [menuOpen, setMenuOpen] = useState(false);
   const [language, setLanguage] = useState("English");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
@@ -111,26 +112,36 @@ recognition.processLocally = false;
     🌱 <span>HomeGrowAI</span>
   </div>
 
-  <nav className="nav-links">
-  {[
-  ["Home", "home"],
-  ["About Our Project", "about"],
-  ["Traditional Gardening", "traditional"],
-  ["AI Gardening Assistant", "assistant"],
-  ["Micro Gardening", "micro"],
-  ["My Garden", "mygarden"],
-  ["My Garden Progress", "progress"],
-  ["Mini Games", "games"],
-  ["About My College", "college"],
-  ["Contact Us", "contact"]
-].map(([label, page]) => (
   <button
-    key={page}
-    onClick={() => setCurrentPage(page)}
-  >
-    {label}
-  </button>
-))}
+  className="menu-toggle"
+  onClick={() => setMenuOpen(!menuOpen)}
+>
+  ☰
+</button>
+
+<nav className={`nav-links ${menuOpen ? "open" : ""}`}>
+  {[
+    ["Home", "home"],
+    ["About Our Project", "about"],
+    ["Traditional Gardening", "traditional"],
+    ["AI Gardening Assistant", "assistant"],
+    ["Micro Gardening", "micro"],
+    ["My Garden", "mygarden"],
+    ["My Garden Progress", "progress"],
+    ["Mini Games", "games"],
+    ["About My College", "college"],
+    ["Contact Us", "contact"]
+  ].map(([label, page]) => (
+    <button
+      key={page}
+      onClick={() => {
+        setCurrentPage(page);
+        setMenuOpen(false);
+      }}
+    >
+      {label}
+    </button>
+  ))}
 </nav>
 
   <button
